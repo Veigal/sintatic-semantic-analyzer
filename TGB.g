@@ -55,33 +55,17 @@ atribuicao returns[ double v ]
 teste
     : 
     ( 
-    	IF {
-    	
-    	    if( ifStack.empty() || ifStack.peek() == 1 ){
-            	comando = $IF.text; 
-            	System.out.println("Comando " + comando + " detectado");
-    	    }            
-    	}     
+    	IF     
     	ifResult = relational_expression { 
     	    ifStack.push( ifResult == true ? 1 : 0 ); 
     	}
-        THEN {
-    	    if( ifStack.empty() || ifStack.peek() == 1 ){        
-      	    	comando = $THEN.text; 
-	    	System.out.println("Comando " + comando + " detectado");
-	    }
-        } comando+
+        THEN 
+        comando+
      ) 
      
      (
 	ELSE {
         ifStack.pop();
-        
-        if( ifStack.empty() || ifStack.peek() == 1 ){
-	        comando = $ELSE.text; 
-	        System.out.println("Comando " + comando + " detectado");
-        }
-
 	}
 	comando+ (SEMI)
 );
